@@ -1,0 +1,9 @@
+{
+  "name": "音声議事録アプリ",
+  "short_name": "議事録App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "録音して議事録を自動作成",
+  "icons": []
+}
