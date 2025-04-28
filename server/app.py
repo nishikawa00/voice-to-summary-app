@@ -26,6 +26,8 @@ TO_EMAIL = os.getenv("TO_EMAIL")
 
 @app.route("/upload", methods=["POST"])
 def upload_audio():
+    print("アップロード受信！")
+    print(request.files)
     file = request.files["file"]
     audio_path = "temp.webm"
     file.save(audio_path)
