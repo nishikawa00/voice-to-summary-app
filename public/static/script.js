@@ -7,6 +7,8 @@ let isRecording = false;
 startStopButton.addEventListener('click', async () => {
     if (!isRecording) {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const options = { mimeType: 'audio/webm' }; 
+
         mediaRecorder = new MediaRecorder(stream);
 
         mediaRecorder.ondataavailable = event => {
@@ -26,7 +28,7 @@ startStopButton.addEventListener('click', async () => {
                     body: formData
                 });
                 const result = await response.text();
-                alert(result);
+                // alert(result);
             } catch (error) {
                 alert('アップロードに失敗しました: ' + error.message);
             }
