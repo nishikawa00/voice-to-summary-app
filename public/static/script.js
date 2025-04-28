@@ -28,7 +28,7 @@ startStopButton.addEventListener('click', async () => {
                 });
 
                 if (!response.ok) {
-                    // HTTPステータスコードがエラーの場合（404, 500など）
+                    // iPhone側のHTTPステータスコードがエラーの場合（404, 500など）
                     const errorText = await response.text();
                     console.error('HTTPエラー:', response.status, errorText);
                     alert('アップロードに失敗しました（HTTPエラー）: ' + response.status);
