@@ -32,6 +32,7 @@ startStopButton.addEventListener('click', async () => {
                 alert(resultJson.summary);
 
             } catch (error) {
+                console.error('アップロード失敗:', error);
                 alert('アップロードに失敗しました: ' + error.message);
             }
         };
