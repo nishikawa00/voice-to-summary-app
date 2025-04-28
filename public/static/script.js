@@ -27,13 +27,22 @@ startStopButton.addEventListener('click', async () => {
                     body: formData
                 });
 
+                if (!response.ok) {
+                    // HTTPステータスコードがエラーの場合（404, 500など）
+                    const errorText = await response.text();
+                    console.error('HTTPエラー:', response.status, errorText);
+                    alert('アップロードに失敗しました（HTTPエラー）: ' + response.status);
+                    return;
+                }
+
                 // 🎯 JSONとしてパースして、summaryだけ取り出してアラート表示
                 const resultJson = await response.json();
                 alert(resultJson.summary);
 
             } catch (error) {
-                console.error('アップロード失敗:', error);
-                alert('アップロードに失敗しました: ' + error.message);
+                // ネットワークエラー(fetch自体が失敗したとき)
+                console.error('fetch自体が失敗:', error);
+                alert('アップロードに失敗しました（fetch失敗）: ' + error.message);
             }
         };
 
