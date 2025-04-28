@@ -20,7 +20,8 @@ pip install -r requirements.txt
 
 ### 3. サーバー起動
 ```bash
-python server/app.py
+cd ~/voice-to-summary-app/server
+gunicorn -b 127.0.0.1:5000 app:app
 ```
 
 ### 4. Webアプリにアクセス
