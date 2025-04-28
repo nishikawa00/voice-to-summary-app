@@ -1,14 +1,13 @@
-const startStopButton = document.getElementById('recordButton');  // ✅ ここ！
-
 let mediaRecorder;
 let audioChunks = [];
+
+const startStopButton = document.getElementById('startStopButton');
 let isRecording = false;
 
 startStopButton.addEventListener('click', async () => {
     if (!isRecording) {
+        // 録音開始
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        const options = { mimeType: 'audio/webm' }; 
-
         mediaRecorder = new MediaRecorder(stream);
 
         mediaRecorder.ondataavailable = event => {
@@ -27,17 +26,23 @@ startStopButton.addEventListener('click', async () => {
                     method: 'POST',
                     body: formData
                 });
-                const result = await response.text();
-                // alert(result);
+
+                // 🎯 JSONとしてパースして、summaryだけ取り出してアラート表示
+                const resultJson = await response.json();
+                alert(resultJson.summary);
+
             } catch (error) {
                 alert('アップロードに失敗しました: ' + error.message);
             }
         };
 
+        audioChunks = []; // 新しい録音のためリセット
         mediaRecorder.start();
         isRecording = true;
         startStopButton.innerText = "録音停止";
+
     } else {
+        // 録音停止
         mediaRecorder.stop();
         isRecording = false;
         startStopButton.innerText = "録音開始";
