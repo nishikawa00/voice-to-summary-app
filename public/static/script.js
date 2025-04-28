@@ -1,12 +1,11 @@
+const startStopButton = document.getElementById('recordButton');  // ✅ ここ！
+
 let mediaRecorder;
 let audioChunks = [];
-
-const startStopButton = document.getElementById('startStopButton');
 let isRecording = false;
 
 startStopButton.addEventListener('click', async () => {
     if (!isRecording) {
-        // 録音開始
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
 
@@ -37,7 +36,6 @@ startStopButton.addEventListener('click', async () => {
         isRecording = true;
         startStopButton.innerText = "録音停止";
     } else {
-        // 録音停止
         mediaRecorder.stop();
         isRecording = false;
         startStopButton.innerText = "録音開始";
